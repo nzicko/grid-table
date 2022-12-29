@@ -1,0 +1,21 @@
+<div class="container">
+  <button (click)="onAddRow()">Add row</button>
+  <button (click)="onDeleteRow()">Delete selected row</button>
+</div>
+
+<div class="table">
+  <table>
+    <tr>
+      <th *ngFor="let column of columns">
+        <span>{{column.name}}</span>
+      </th>
+    </tr>
+
+    <tr *ngFor="let row of rows" (click)="onRowSelect(row)" [ngClass]="{'selected' : row.selected}">
+      <td *ngFor="let cell of row.cells">
+        <input *ngIf="cell.editable" type="text" [(ngModel)]="cell.value" (focusout)="onFocusOut($event)"/>
+        <span *ngIf="!cell.editable">{{cell.value}}</span>
+      </td>
+    </tr>
+  </table>
+</div>
